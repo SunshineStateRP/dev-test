@@ -1,5 +1,3 @@
-import { myRandomData } from "./MyOther.client";
-
 const multiplyByTwo = (num: number) => num * 2;
 
 const divideByThree = (num: number) => num / 3;

@@ -3,19 +3,15 @@ on: [push]
 
 jobs: 
   build-test:
-    name: Build Test
+    name: Build & Unit Test
     runs-on: [ubuntu-latest]
-
-    strategy:
-      matrix:
-        node-version: ['16.x', '17.x', '18.x']
 
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16.x
           cache: 'npm'
           cache-dependency-path: ./src/package-lock.json
       - name: Install dependencies
@@ -24,3 +20,6 @@ jobs:
       - name: Build Bundles
         working-directory: ./src
         run: npm run build
+      - name: Unit Tests
+        working-directory: ./src
+        run: npm run test

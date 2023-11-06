@@ -1,5 +1,5 @@
 import { test, expect } from "@jest/globals";
-import { multiplyByTwo, divideByThree, sliceString } from "../client";
+import { multiplyByTwo, divideByThree, sliceString } from "./client";
 
 // Test numbers and results for multiplyByTwo
 const testNum1 = 1;

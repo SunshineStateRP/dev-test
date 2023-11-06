@@ -1,116 +1,38 @@
-## Note
-This is the standard TypeScript boilerplate to be used by SSRP.
-It is a copy of https://github.com/project-error/fivem-typescript-boilerplate, all credits go to project-error. The only change is to move all source files, including package.json into a separate folder to stop yarn from triggering when running BUNDLED files in server. #Fuck yarn
+## SSRP Developer test, Part 2
+For part 2 of the developer test, you will create a chat filter that will filter our messages containing blacklisted words or symbols.
 
-Original README:
+### Word lists
+The words we want to filter out are classified into 3 categories:
+- Warn: If a player uses a word from this list, delete the message and warn the user
+- Symbol: If a player uses a symbol from this list, delete the message and warn the user
+- Kick: If a player uses a word from this list, kick the user
 
-<div align="center">
-    <img href="https://projecterror.dev" width="150" src="https://i.tasoagc.dev/c1pD" alt="Material-UI logo" />
-</div>
-<h1 align="center">FiveM TypeScript Resource Boilerplate</h1>
+You're free to choose how to store these words, but we recommend using a JSON file. If you run into issues with importing the JSON file, you can use a TypeScript file instead.
+Please only use example words for the word lists.
 
-<div align="center">
-This is a simple boilerplate for getting started with TypeScript game-scripts, in FiveM.
-</div>
+### Requirements
+- The filter should be case insensitive, and should not be affected by spaces or characters around the word (If apple is a filtered word, "a p p l e", "aPpLe" and "bapples" should all trigger the filter)
+- The filter should automatically check all incoming chat messages
+- The filter should take the correct action based on the word list the word is in, the priority is Kick > Warn > Symbol (kick has the highest priority, symbol has the lowest)
+- An export that allows the filter to be used in other resources should be created
+- You should implement a unit test for the filter, the test should check that the filter works as intended
 
-<div align="center">
+If you're running into issues with unit tests failing beacause you're not testing anything, add expect(true).toBe(true) to the test function.
 
-[![Depfu](https://badges.depfu.com/badges/d269ca2d36b5d4cf247e66c6400c216d/count.svg)](https://depfu.com/github/project-error/fivem-typescript-boilerplate?project_id=33035)
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/project-error/pe-utils/master/LICENSE)
-![Discord](https://img.shields.io/discord/791854454760013827?label=Our%20Discord)
-</div>
+A basic unit test is provided for both server and client side, you can run the tests with `npm run test`
 
-This repository is a basic boilerplate for getting started
-with TypeScript resources in FiveM. This boilerplate only comes with
-development dependencies needed for FiveM-centered TypeScript transpilation, the rest
-is up to you.
+### TypeScript boilerplate
+- The project is set up to use TypeScript, the boilerplate expects you to use NPM not Yarn
+- Before you start working on the project, run `npm install` to install the required packages, types for FiveM are already included
+- To build the project, run `npm run build`
+- To run the unit tests, run `npm run test`
 
-*Note: This boilerplate is targeting TypeScript in context of game-scripts,
-if you wish to use TypeScript in NUI, take a look at our other [boilerplate](https://github.com/project-error/fivem-react-boilerplate-lua)*
+### Notes
+There should be no need to add more packages to the project, if you do so please explain why in your submission. Packages that over simplify the task will lead to an automatic rejection.
 
-## Foreword
+If you're stuck or have any questions, don't hesitate to ask us for help.
 
-This boilerplate was originally based off a previous popular TypeScript boilerplate,
-made by [d0p3t](https://github.com/d0p3t/fivem-ts-boilerplate). He heartbeakingly passed
-in 2021, leaving the original unmaintained. This boilerplate was an up-to-date alternative.
+### Submission
+When you're done, please submit your solution as a pull request to this repository. If you're not familiar with pull requests, you can also send us a zip file of your solution in the Discord ticket.
 
-Since then, this boilerplate has been updated to take advantage of tooling progress made
-in the greater NPM ecosystem.
-
-## Requirements
-* Node > v16
-* Yarn
-
-## Getting Started
-
-First clone the repository or use the template option 
-and place it within your `resources` folder
-
-**Install Dependencies**
-
-Navigate into the newly cloned folder and execute
-the following command, to install dependencies.
-
-```sh
-npm i
-```
-
-## Development
-
-### Hot Building
-
-While developing your resource, this boilerplate offers 
-a `watch` script that will automatically hot rebuild on any
-change within the `client` or `server` directories.
-
-```sh
-npm run watch
-```
-*This script still requires you restart the resource for the
-changes to be reflected in-game*
-
-### Entry Points
-**Client** - `./client/client.ts`
-
-**Server** - `./server/server.ts`
-
-## Production Build
-Once you have completed the development phase of your resource,
-you must create an optimized & minimized production build, using
-the `build` script.
-
-```sh
-npm run build
-```
-
-## Version < 2.0.0
-
-Version 2.0.0 introduced ESBuild as the primary bundler, removing
-the option for automatic builds through the embedded FXServer webpack builder.
-
-This documentation is preserved for legacy purposes.
-
-### Automatic Builds (Optional)
-
-*This is not recommended as the embedded version of yarn is 
-ocassionally prone to performance and environment problems. We 
-highly recomend, you manually run the build script*
-
-If desired, the `fxmanifest.lua` can be setup to allow for
-FXServer to automatically build on resource start. This utilizes
-the embedded `yarn` & `webpack` default resources.
-
-To enable this, add the following to your `fxmanifest.lua`
-
-```lua
-dependency {
-    'yarn',
-    'webpack'
-}
-
-webpack_config 'webpack.config.js'
-```
-
-### Additional Notes
-
-Need further support? Join our [Discord](https://discord.com/invite/HYwBjTbAY5)!
+Your code should be well documented and easy to read, please briefly explain any choices you've made in your submission.

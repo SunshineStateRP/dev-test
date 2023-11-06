@@ -1,4 +1,4 @@
-import { addNumbers } from "../server";
+import { addNumbers } from "./server";
 import { expect, test } from "@jest/globals";
 
 const testArr1 = [1, 2, 3, 4, 5];
