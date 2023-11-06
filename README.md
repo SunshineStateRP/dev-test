@@ -23,6 +23,7 @@ A basic unit test is provided for both server and client side, you can run the t
 
 ### TypeScript boilerplate
 - The project is set up to use TypeScript, the boilerplate expects you to use NPM not Yarn
+- All NPM commands must be run from the ./src folder
 - Before you start working on the project, run `npm install` to install the required packages, types for FiveM are already included
 - To build the project, run `npm run build`
 - To run the unit tests, run `npm run test`
